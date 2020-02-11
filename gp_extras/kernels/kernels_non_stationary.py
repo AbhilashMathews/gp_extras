@@ -509,12 +509,14 @@ class HeteroscedasticKernel(Kernel):
             hyperparameter of the kernel. Only returned when eval_gradient
             is True.
         """
+                
         prototypes_std = self.prototypes.std(0)
         n_prototypes = self.prototypes.shape[0]
         n_gradient_dim = \
             n_prototypes + (0 if self.hyperparameter_gamma.fixed else 1)
 
         X = np.atleast_2d(X)
+        self.theta_gp = 0.#self.theta_gp_size = 1 # else X_.shape[1]
         if Y is not None and eval_gradient:
             raise ValueError("Gradient can only be evaluated when Y is None.")
 
